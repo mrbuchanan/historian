@@ -22,12 +22,13 @@ namespace Historian.Service
 
         protected override void OnStart(string[] args)
         {
-            // TODO: Add code here to start your service.
+            // setup web api service options
             var options = new StartOptions()
             {
                 Port = 6666
             };
 
+            // start webapi
             _server = WebApp.Start<Startup>(options);
         }
 

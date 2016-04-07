@@ -45,9 +45,11 @@
     <Compile Include="ILogger.cs" />
     <Compile Include="ILoggerConfiguration.cs" />
     <Compile Include="ILogRetriever.cs" />
+    <Compile Include="IStartableLogger.cs" />
     <Compile Include="LoggerConfiguration.cs" />
     <Compile Include="Loggers\InvalidMessageException.cs" />
     <Compile Include="Loggers\MemoryLogger.cs" />
+    <Compile Include="Loggers\MemoryWBackupLogger.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="MessageKind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

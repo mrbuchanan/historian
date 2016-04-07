@@ -3,6 +3,7 @@ using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,18 @@ namespace Historian.Service
                 Port = 6666
             };
 
-            WebApp.Start<Startup>("http://+:8081");
+            using (WebApp.Start<Startup>("http://+:8081"))
+            {
+                var client = new HttpClient()
+                {
+                    BaseAddress = new Uri("http://localhost:8081/api/")
+                };
 
-            Console.WriteLine("bob!");
-            Console.ReadLine();
+                var message = "{ Contents: \"test\", Kind: \"Information\", Channel: \"PureFarming Errors\" }";
+
+                Console.WriteLine("bob!");
+                Console.ReadLine();
+            }
 #else
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]

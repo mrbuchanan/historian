@@ -25,7 +25,7 @@ namespace Historian.Service.Controllers
         [Route("drop")]
         public void DropMessage([FromBody] Message message)
         {
-            MessageDrop.Drop(message);
+            MessageDrop.Drop(message, _logger);
         }
     }
 }

@@ -6,30 +6,20 @@ using System.Threading.Tasks;
 
 namespace Historian.Loggers
 {
-    public class MemoryLogger : ILogger, ILogRetriever
+    public class MemoryLogger : IStartableLogger
     {
         private const string CatchAllGroup = "Un-Filed";
 
         private readonly ILoggerConfiguration _configuration;
-        private readonly List<Message> _messages;
-        private readonly List<Channel> _channels;
-        private readonly List<ChannelGroup> _channelGroups;
+        private List<Message> _messages;
+        private List<Channel> _channels;
+        private List<ChannelGroup> _channelGroups;
 
         public MemoryLogger(ILoggerConfiguration configuration)
         {
             if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             _configuration = configuration;
-
-            _messages = new List<Message>();
-            _channels = new List<Channel>();
-            _channelGroups = new List<ChannelGroup>();
-
-            _channelGroups.Add(new ChannelGroup()
-            {
-                Id = Guid.NewGuid(),
-                Name = CatchAllGroup
-            });
         }
 
         public void Log(Message message)
@@ -95,6 +85,32 @@ namespace Historian.Loggers
         public IEnumerable<ChannelGroup> GetChannelGroups()
         {
             return _channelGroups;
+        }
+
+        public void Start()
+        {
+            _messages = new List<Message>();
+            _channels = new List<Channel>();
+            _channelGroups = new List<ChannelGroup>();
+
+            _channelGroups.Add(new ChannelGroup()
+            {
+                Id = Guid.NewGuid(),
+                Name = CatchAllGroup
+            });
+        }
+
+        public void Stop()
+        {
+            _messages = new List<Message>();
+            _channels = new List<Channel>();
+            _channelGroups = new List<ChannelGroup>();
+
+            _channelGroups.Add(new ChannelGroup()
+            {
+                Id = Guid.NewGuid(),
+                Name = CatchAllGroup
+            });
         }
     }
 }

@@ -20,6 +20,20 @@ namespace Historian.Service.Controllers
         }
 
         [HttpGet]
+        [Route("all")]
+        public IEnumerable<Channel> All()
+        {
+            return _logRetriever.GetChannels();
+        }
+
+        [HttpGet]
+        [Route("{channel}/messages/all")]
+        public IEnumerable<Message> AllForChannel(string channel)
+        {
+            return _logRetriever.GetMessages(channel);
+        }
+
+        [HttpGet]
         [Route("test")]
         public string[] GetTest()
         {
