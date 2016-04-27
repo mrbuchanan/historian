@@ -35,7 +35,7 @@ namespace Historian.Remote
                 Channel = channel,
                 Kind = kind,
                 Title = title,
-                Tags = tags
+                Tags = tags.ToList()
             };
 
             SendMessage(message, _configuration);
@@ -91,7 +91,7 @@ namespace Historian.Remote
                 Channel = channel,
                 Kind = kind,
                 Title = title,
-                Tags = tags
+                Tags = tags.ToList()
             };
 
             await DoSendAsync(message, _configuration);

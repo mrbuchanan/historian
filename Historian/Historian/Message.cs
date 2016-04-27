@@ -17,7 +17,7 @@ namespace Historian
 
         public string Title { get; set; }
 
-        public IEnumerable<string> Tags { get; set; }
+        public List<string> Tags { get; set; }
 
         internal bool Check()
         {

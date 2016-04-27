@@ -52,7 +52,7 @@ namespace Historian.Loggers
                 Channel = channel,
                 Kind = kind,
                 Title = title,
-                Tags = tags
+                Tags = tags.ToList()
             };
 
             Log(message);

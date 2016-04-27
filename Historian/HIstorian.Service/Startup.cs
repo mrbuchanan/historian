@@ -75,8 +75,8 @@ namespace Historian.Service
                     // setup the queues
                     Queues = new[]
                     {
-                    "message_drop"
-                },
+                        "message_drop"
+                    },
 
                     // set good 
                     WorkerCount = 4

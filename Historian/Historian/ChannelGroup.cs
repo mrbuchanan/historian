@@ -13,6 +13,6 @@ namespace Historian
 
         public string Name { get; set; }
 
-        public IEnumerable<Channel> Channels { get; }
+        public List<Channel> Channels { get; }
     }
 }
