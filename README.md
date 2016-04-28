@@ -2,10 +2,10 @@
 
 Welcome to historian, this is a tool intended to provide internal, application agnostic logging and analysis.
 
-## History of historian
+### History of historian
 The idea for historian came about while working on a project that required a lot of logging to determine what was going on, but was writing to file using log4net or similar, making the log files hard to find and read.
 
-## Basic Features
+### Basic Features
 - Remote logging (*Historian.Remote*)
 - Choice of logging backends on Service side:
   - MemoryLogger
@@ -13,7 +13,7 @@ The idea for historian came about while working on a project that required a lot
 - Simple Message format (handles HTML)
 - Simple Dashboard allowing you to view messages
 
-## Planned Features
+### Planned Features
 - Logging:
   - Timestamps
   - SqlLogger (*Note, that this should only be used with the HangFire logging option turned on*)
