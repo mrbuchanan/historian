@@ -15,8 +15,8 @@ namespace Historian
 
         public string Group { get; set; }
 
-        public IEnumerable<string> Tags { get; set; }
+        public List<string> Tags { get; set; }
 
-        public IEnumerable<Message> Messages { get; set; }
+        public List<Message> Messages { get; set; }
     }
 }
