@@ -12,9 +12,9 @@ namespace Historian.Dashboard.Dashboard.Content
 {
     internal static class ContentExtensions
     {
-        private const string ContentPath = "content/";
+        private const string ContentPath = "/content/";
         public const string ContentAssembly = "Historian.Dashboard";
-        private const string ContentAssemblyPath = "Historian.Dashboard.Dashboard.Content";
+        private const string ContentAssemblyPath = "Dashboard.Content";
 
         public static void HostContent(this IAppBuilder app, DashboardOptions options)
         {
@@ -33,6 +33,7 @@ namespace Historian.Dashboard.Dashboard.Content
                     var path = request.Path.Value;
                     path = path.Replace(ContentPath, "");
                     path = path.Replace("/", ".");
+                    path = $"{ContentAssemblyPath}.{path}";
 
                     // get path parts
                     var pathParts = path.Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);

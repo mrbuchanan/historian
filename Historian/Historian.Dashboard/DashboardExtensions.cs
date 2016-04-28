@@ -15,8 +15,18 @@ namespace Historian.Dashboard
             // host content (images etc)
             app.HostContent(options);
 
+            // host webservice pass through
+            app.HostWebServicePassthrough("/ws-passthrough");
+
+            // host the dashboard page
+            app.HostPage("/dashboard", "Dashboard.Content.html.dashboard.html", new
+            {
+                historianServiceUri = options.HistorianServiceUri,
+                baseUrl = options.DashboardUri
+            });
+
             // host the landing page
-            app.HostPage("/dashboard", "Dashboard.Content.html.landing.html", new
+            app.HostPage("/", "Dashboard.Content.html.landing.html", new
             {
                 historianServiceUri = options.HistorianServiceUri,
                 baseUrl = options.DashboardUri

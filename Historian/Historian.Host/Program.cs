@@ -24,8 +24,6 @@ namespace Historian.Host
             dashboard.Dispose();
 
             Console.WriteLine("Historian Stopped, press any key to exit.");
-            Console.ReadLine();
-
         }
     }
 }

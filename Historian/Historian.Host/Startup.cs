@@ -15,7 +15,8 @@ namespace Historian.Host
             // host dashboard
             app.HostDashboard(new DashboardOptions()
             {
-                
+                DashboardUri = "http://localhost:8082",
+                HistorianServiceUri = "http://localhost:8081"
             });
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
         }

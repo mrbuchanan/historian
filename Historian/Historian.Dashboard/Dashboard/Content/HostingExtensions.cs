@@ -3,7 +3,9 @@ using MimeTypes;
 using Owin;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,79 @@ namespace Historian.Dashboard.Dashboard.Content
 {
     internal static class HostingExtensions
     {
+        public static void HostWebServicePassthrough(this IAppBuilder app, string path)
+        {
+            app.Use(async (context, next) =>
+            {
+                // get the request and current path
+                var runNext = true;
+                var request = context.Request;
+                var currentPath = request.Path;
+
+                // check it matches the one we want
+                if (currentPath.HasValue && currentPath.Value.Contains(path))
+                {
+                    // don't run the next OWIN item
+                    runNext = false;
+
+                    // get the request information
+                    var requestUri = request.Query["uri"];
+                    var requestMethod = ParseMethod(request.Method);
+
+                    // if we don't have a uri
+                    if (string.IsNullOrWhiteSpace(requestUri))
+                    {
+                        // return not found
+                        context.Response.StatusCode = 404;
+                    }
+                    else
+                    {
+                        // create client and message
+                        var client = new HttpClient();
+                        var message = new HttpRequestMessage(requestMethod, requestUri);
+
+                        // if this had a posted body
+                        if (requestMethod == HttpMethod.Post || requestMethod == HttpMethod.Put)
+                        {
+                            // copy into message
+                            using (var reader = new StreamReader(request.Body))
+                            {
+                                var content = reader.ReadToEnd();
+                                message.Content = new StringContent(content);
+                            }
+                        }
+
+                        // send to other part
+                        var response = await client.SendAsync(message);
+
+                        // pass status code back
+                        context.Response.StatusCode = (int) response.StatusCode;
+
+                        // pass response back
+                        using (var responseBody = await response.Content.ReadAsStreamAsync())
+                        {
+                            await responseBody.CopyToAsync(context.Response.Body);
+                        }
+                    }
+                }
+
+                // if we are running the next item, do it
+                if (runNext) await next.Invoke();
+            });
+        }
+
+        private static HttpMethod ParseMethod(string method)
+        {
+            switch (method)
+            {
+                default: return HttpMethod.Get;
+                case "GET": return HttpMethod.Get;
+                case "POST": return HttpMethod.Post;
+                case "PUT": return HttpMethod.Put;
+                case "DELETE": return HttpMethod.Delete;
+            }
+        }
+
         /// <summary>
         /// Host a static page
         /// </summary>

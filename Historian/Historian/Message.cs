@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Historian
 {
@@ -12,12 +13,16 @@ namespace Historian
         public string Contents { get; set; }
 
         public MessageKind Kind { get; set; }
+
+        public string KindName { get { return Kind.ToString(); } }
         
         public string Channel { get; set; }
 
         public string Title { get; set; }
 
         public List<string> Tags { get; set; }
+
+        public DateTime Timestamp { get; set; }
 
         internal bool Check()
         {

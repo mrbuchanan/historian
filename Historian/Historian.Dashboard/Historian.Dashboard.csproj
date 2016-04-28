@@ -74,11 +74,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Dashboard\Content\css\" />
-    <Folder Include="Dashboard\Content\js\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dashboard\Content\html\landing.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dashboard\Content\css\base.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dashboard\Content\css\dashboard.css" />
+    <EmbeddedResource Include="Dashboard\Content\html\dashboard.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dashboard\Content\js\dashboard.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

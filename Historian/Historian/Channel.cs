@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Historian
 {
-    [Serializable]
     public class Channel
     {
         public Guid Id { get; set; }
