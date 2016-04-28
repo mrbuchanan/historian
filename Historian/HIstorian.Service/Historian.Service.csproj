@@ -128,7 +128,6 @@
     <Compile Include="HistorianService.Designer.cs">
       <DependentUpon>HistorianService.cs</DependentUpon>
     </Compile>
-    <Compile Include="ICombinedLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

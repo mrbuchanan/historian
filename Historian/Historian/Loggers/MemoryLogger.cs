@@ -51,9 +51,10 @@ namespace Historian.Loggers
                 Contents = contents,
                 Channel = channel,
                 Kind = kind,
-                Title = title,
-                Tags = tags
+                Title = title
             };
+
+            if (tags != null) message.Tags = tags.ToList();
 
             Log(message);
         }

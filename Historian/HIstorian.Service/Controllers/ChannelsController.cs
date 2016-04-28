@@ -27,6 +27,13 @@ namespace Historian.Service.Controllers
         }
 
         [HttpGet]
+        [Route("groups")]
+        public IEnumerable<ChannelGroup> AllGroups()
+        {
+            return _logRetriever.GetChannelGroups();
+        }
+
+        [HttpGet]
         [Route("{channel}/messages/all")]
         public IEnumerable<Message> AllForChannel(string channel)
         {
@@ -34,14 +41,21 @@ namespace Historian.Service.Controllers
         }
 
         [HttpGet]
-        [Route("test")]
-        public string[] GetTest()
+        [Route("{channel}/messages/by-kind/{kind}")]
+        public IEnumerable<Message> AllForKind(string channel, string kind)
         {
-            return new[]
-            {
-                "Value 1",
-                "Value 2"
-            };
+            var messageKind = MessageKind.Information;
+            var success = Enum.TryParse(kind, out messageKind);
+            if(!success) messageKind = MessageKind.Information;
+
+            return _logRetriever.GetMessages(channel, messageKind);
         }
+
+        [HttpGet]
+        [Route("{channel}/messages/by-tag/{tag}")]
+        public IEnumerable<Message> AllForTag(string channel, string tag)
+        {
+            return _logRetriever.GetMessages(channel, null, tag);
+        } 
     }
 }

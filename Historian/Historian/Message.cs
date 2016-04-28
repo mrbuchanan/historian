@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Historian
 {
-    [Serializable]
-    public sealed class Message
+    public class Message
     {
+        public Message()
+        {
+            Tags = new List<string>();
+        }
+
         public string Contents { get; set; }
 
         public MessageKind Kind { get; set; }
@@ -17,7 +17,7 @@ namespace Historian
 
         public string Title { get; set; }
 
-        public IEnumerable<string> Tags { get; set; }
+        public List<string> Tags { get; set; }
 
         internal bool Check()
         {
