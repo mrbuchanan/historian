@@ -73,7 +73,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Content Include="Dashboard\Content\html\dashboard.channel.messages.html" />
+    <Content Include="Dashboard\Content\html\dashboard.channel.overview.html" />
+    <Content Include="Dashboard\Content\html\dashboard.overview.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dashboard\Content\html\landing.html" />

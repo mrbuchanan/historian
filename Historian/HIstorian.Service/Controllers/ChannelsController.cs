@@ -41,6 +41,15 @@ namespace Historian.Service.Controllers
         }
 
         [HttpGet]
+        [Route("{channel}/messages/startingAt/{from}")]
+        public IEnumerable<Message> StartingAt(string channel, DateTime from)
+        {
+            var messages = _logRetriever.GetMessages(channel);
+            messages = messages.OrderByDescending(m => m.Timestamp);
+            return messages.Where(m => m.Timestamp >= from);
+        }
+
+        [HttpGet]
         [Route("{channel}/messages/by-kind/{kind}")]
         public IEnumerable<Message> AllForKind(string channel, string kind)
         {

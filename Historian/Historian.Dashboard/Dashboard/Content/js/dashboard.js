@@ -1,17 +1,17 @@
-﻿$(function() {
+﻿var hsDashboard = function () {
     var baseUrl = $('body').attr('baseUrl');
     var historianUrl = $('body').attr('historianUrl');
-    
-
     var sidebar = $('.historian-sidebar-channels');
 
-    function loadChannels() {
+    var loadChannels = function () {
         // get channels url and pass-through url
         var channelsUrl = historianUrl + '/api/channels/all';
         var requestUrl = baseUrl + '/ws-passthrough?uri=' + channelsUrl;
 
         // make request for data
         $.getJSON(requestUrl, function (data) {
+            sidebar.html('');
+
             // check if we have data
             if (data.length == 0) {
                 // if we don't, show message
@@ -43,9 +43,12 @@
         });
     }
 
-    function selectChannel() {
+    var selectChannel = function() {
         // get the current li (clicked on)
         var current = $(this);
+
+        // get the channel name
+        var channelName = current.attr('channel_name');
 
         // remove any active flags
         $('.historian-sidebar-channels li').each(function(i, o) {
@@ -54,19 +57,28 @@
 
         // make this one active
         current.addClass('active');
+        current.find('a').html('&#35;' + channelName + ' - Loading...');
 
-        // get the channel name
-        var channelName = current.attr('channel_name');
+        $('.historian-dashboard-title').html('&#35;' + channelName);
+        
+        var currentDate = new Date();
+        currentDate.setMonth(currentDate.getMonth() - 1);
 
+        loadMessages(channelName, currentDate, function () {
+            current.find('a').html('&#35;' + channelName);
+        });
+    }
+
+    var loadMessages = function(channel, from, callback) {
         // create urls
-        var messagesUrl = historianUrl + '/api/channels/' + channelName + '/messages/all';
+        var messagesUrl = historianUrl + '/api/channels/' + channel + '/messages/startingAt/' + from.toJSON();
         var requestUrl = baseUrl + '/ws-passthrough?uri=' + messagesUrl;
 
         // make request
         $.getJSON(requestUrl, function (data) {
             $('.historian-messages tbody').html('');
             if (data.length == 0) {
-                $('.historian-messages tbody').html('<tr><td colspan="5">There are no messages for &#35;' + channelName + '</td></tr>');
+                $('.historian-messages tbody').html('<tr><td colspan="6">There are no messages for &#35;' + channel + '</td></tr>');
             } else {
                 var kinds = new Array();
 
@@ -92,10 +104,16 @@
                     td = $("<td />");
                     td.html(data[i].KindName);
                     td.appendTo(row);
-                    
+
                     // create contents cell
                     td = $("<td />");
                     td.html(data[i].Contents);
+                    td.appendTo(row);
+
+                    var timestampJson = data[i].Timestamp;
+                    var timestamp = new Date(Date.parse(timestampJson));
+                    td = $("<td />");
+                    td.html(timestamp.toDateString() + '<br />' + timestamp.toTimeString());
                     td.appendTo(row);
 
                     // append row
@@ -105,23 +123,12 @@
                 }
 
                 var stats = countOccurances(kinds);
-                var percentages = new Array();
-
-                for (var i = 0; i < stats[1].length; i++) {
-                    percentages.push((stats[1][i] / kinds.length) * 100);
-                }
 
                 var data = {
-                    labels: [
-                        "Debug",
-                        "Information",
-                        "Warning",
-                        "Error",
-                        "WTF"
-                    ],
+                    labels: stats[0],
                     datasets: [
                         {
-                            data: [0, 100, 0, 0, 0],
+                            data: stats[1],
                             backgroundColor: [
                                 "#2aabd2",
                                 "#265a88",
@@ -139,10 +146,14 @@
                     //options: options
                 });
             }
+
+            if (callback != null) {
+                callback();
+            }
         });
     }
 
-    function countOccurances(arr) {
+    var countOccurances = function(arr) {
         var a = [], b = [], prev;
 
         arr.sort();
@@ -159,5 +170,7 @@
         return [a, b];
     }
 
-    loadChannels();
-});
+    this.load = function() {
+        loadChannels();
+    }
+}
