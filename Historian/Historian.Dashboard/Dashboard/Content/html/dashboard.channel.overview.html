@@ -1,11 +1,33 @@
-﻿<!DOCTYPE html>
+﻿<h3 class="page-header">
+    Overview
+    <small class="historian-dashboard-title"></small>
+</h3>
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder">
+        <canvas class="historian-messages-kindsChart" width="400" height="400"></canvas>
+        <h4>Distribution by Kind</h4>
+    </div>
+</div>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<h4 class="sub-header">
+    Messages
+    <small>10 most recent</small>
+</h4>
+<div class="table-responsive">
+    <table class="table table-striped historian-messages">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Title</th>
+                <th>Tags</th>
+                <th>Kind</th>
+                <th>Contents</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="6">You have no messages</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

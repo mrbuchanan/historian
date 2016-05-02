@@ -9,5 +9,7 @@ namespace Historian
     public class ChannelStats
     {
         public string Channel { get; set; }
+
+        
     }
 }

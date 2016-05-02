@@ -73,9 +73,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dashboard\Content\html\dashboard.channel.messages.html" />
-    <Content Include="Dashboard\Content\html\dashboard.channel.overview.html" />
+    <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.messages.html" />
+    <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.overview.html" />
     <Content Include="Dashboard\Content\html\dashboard.overview.html" />
+    <EmbeddedResource Include="Dashboard\Content\html\dashboard.sidebar.html" />
+    <EmbeddedResource Include="Dashboard\Content\js\dashboard.channel.messages.js" />
+    <EmbeddedResource Include="Dashboard\Content\js\dashboard.channel.overview.js" />
+    <EmbeddedResource Include="Dashboard\Content\js\dashboard.sidebar.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dashboard\Content\html\landing.html" />
