@@ -16,16 +16,28 @@
 
         $('.main').load(overviewHtmlUrl, function () {
             $('.hs-channel-name').html(channelName);
-            loadLastDay(channelName, callback);
+
+            $('#messages_all').click(function () { loadLastDay(channelName, 'All', callback) });
+            $('#messages_debug').click(function () { loadLastDay(channelName, 'Debug', callback) });
+            $('#messages_info').click(function () { loadLastDay(channelName, 'Information', callback) });
+            $('#messages_warning').click(function () { loadLastDay(channelName, 'Warning', callback) });
+            $('#messages_error').click(function () { loadLastDay(channelName, 'Error', callback) });
+            $('#messages_wtf').click(function () { loadLastDay(channelName, 'WTF', callback) });
+
+            loadLastDay(channelName, 'All', callback);
 
             $("#channel_overview").click(function () { historian.channel.loadOverview(channelName, callback); });
         });
     };
 
-    function loadLastDay(channel, callback) {
+    function loadLastDay(channel, kind, callback) {
+        if (kind == null || kind === undefined) kind = 'All';
+
         // create urls
-        var messagesUrl = historianUrl + '/api/dashboard/channels/' + channel + '/messages/last-day';
+        var messagesUrl = historianUrl + '/api/dashboard/channels/' + channel + '/messages/last-day/' + kind;
         var requestUrl = baseUrl + '/ws-passthrough?uri=' + messagesUrl;
+
+        $('#messages_selected').html(kind);
 
         // make request
         $.getJSON(requestUrl, function (data) {

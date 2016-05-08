@@ -13,11 +13,30 @@
     </div>
 </div>
 <div class="row">
-    <div class="btn-group" role="group" aria-label="...">
-        <button type="button" class="btn btn-default hs-channel-messages-lastDay active">Last Day</button>
-        <button type="button" class="btn btn-default hs-channel-messages-warnings">Warnings</button>
-        <button type="button" class="btn btn-default hs-channel-messages-errors">Errors</button>
-        <button type="button" class="btn btn-default hs-channel-messages-information">Information</button>
+    <div class="btn-group col-md-4" role="group">
+        <div class="btn-group" role="group">
+            <a href="#" role="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Last Day
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li id="messages_all"><a href="#">All</a></li>
+                <li role="separator" class="divider"></li>
+                <li id="messages_debug" class="list-group-item-info"><a href="#">Debug</a></li>
+                <li id="messages_info" class="list-group-item-success"><a href="#">Information</a></li>
+                <li id="messages_warning" class="list-group-item-warning"><a href="#">Warnings</a></li>
+                <li id="messages_error" class="list-group-item-danger"><a href="#">Errors</a></li>
+                <li id="messages_wtf" class="list-group-item-danger"><a href="#">WTF</a></li>
+            </ul>
+        </div>
+        <a id="messages_selected" href="#" role="button" class="btn"></a>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="input-group col-md-6">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Search</button>
+        </span>
     </div>
 </div>
 <div class="table-responsive">
