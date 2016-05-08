@@ -15,10 +15,26 @@
         var overviewHtmlUrl = baseUrl + '/content/html/dashboard.channel.overview.html';
 
         $('.main').load(overviewHtmlUrl, function () {
-            $('.main .page-header').html('Channel Overview <small>&#35;' + channelName + '</small>');
+            $('.hs-channel-name').html(channelName);
             loadMostRecentMessages(channelName, callback);
+            loadLastTwelveHours(channelName);
+
+            $("#channel_messages").click(function() { historian.channel.loadMessages(channelName, callback); });
         });
     };
+
+    function loadLastTwelveHours(channel) {
+        var graphUrl = historianUrl + '/api/dashboard/channels/' + channel + '/graphs/last-twelve-hours';
+        var requestUrl = baseUrl + '/ws-passthrough?uri=' + graphUrl;
+
+        $.getJSON(requestUrl, function(data) {
+            var ctx = $('.hs-messages-lastTwelveHoursChart')[0];
+            var lineChart = new Chart(ctx, {
+                type: 'line',
+                data: data
+            });
+        });
+    }
 
     function loadMostRecentMessages (channel, callback) {
         // create urls

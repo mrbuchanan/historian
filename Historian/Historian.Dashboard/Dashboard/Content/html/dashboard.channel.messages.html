@@ -1,7 +1,25 @@
-﻿<h3 class="page-header">
-    Messages
-    <small class="historian-dashboard-title"></small>
-</h3>
+﻿<div class="page-header row">
+    <div class="col-md-8">
+        <h3>
+            Messages
+            <small>&#35;</small><small class="hs-channel-name"></small>
+        </h3>
+    </div>
+    <div class="col-md-4">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <a id="channel_overview" role="button" class="btn btn-default">Overview</a>
+            <a id="channel_messages" role="button" class="btn btn-default active">Messages</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default hs-channel-messages-lastDay active">Last Day</button>
+        <button type="button" class="btn btn-default hs-channel-messages-warnings">Warnings</button>
+        <button type="button" class="btn btn-default hs-channel-messages-errors">Errors</button>
+        <button type="button" class="btn btn-default hs-channel-messages-information">Information</button>
+    </div>
+</div>
 <div class="table-responsive">
     <table class="table table-striped historian-messages">
         <thead>

@@ -94,6 +94,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Dashboard\Content\js\dashboard.js" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Historian\Historian.csproj">
+      <Project>{32C01FC4-36AB-4DEA-BCAE-D7A8FB4D7FB4}</Project>
+      <Name>Historian</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
