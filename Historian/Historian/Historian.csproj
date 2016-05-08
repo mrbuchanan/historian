@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Channel.cs" />
     <Compile Include="ChannelGroup.cs" />
+    <Compile Include="ChannelStats.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="ILoggerConfiguration.cs" />
     <Compile Include="ILogRetriever.cs" />

@@ -15,8 +15,8 @@ namespace Historian.Host
             var dashboard = WebApp.Start<DashboardStartup>("http://+:8082");
 
             Console.WriteLine("Historian Started");
-            Console.WriteLine("Service: http://localhost:8081");
-            Console.WriteLine("Dashboard: http://localhost:8082/dashboard");
+            Console.WriteLine("Service: http://localhost:8081/");
+            Console.WriteLine("Dashboard: http://localhost:8082/");
 
             Console.ReadLine();
 

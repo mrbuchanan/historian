@@ -12,7 +12,6 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="{baseUrl}/content/css/dashboard.css" rel="stylesheet">
@@ -39,8 +38,18 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{baseUrl}/">Home</a></li>
-                    <li><a href="{baseUrl}/dashboard">Dashboard</a></li>
+                    <li>
+                        <a href="{baseUrl}/">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            Home
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="{baseUrl}/dashboard">
+                            <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+                            Dashboard
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -50,55 +59,22 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li><label>Channels:</label></li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                            Overview
+                        </a>
+                    </li>
                 </ul>
-                <ul class="nav nav-sidebar historian-sidebar-channels"></ul>
+                <ul class="nav nav-sidebar historian-sidebar-channels">
+                    <li><a href="#">Loading...</a></li>
+                </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
-
-                <div class="row placeholders">
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <canvas class="historian-messages-kindsChart" width="200" height="200"></canvas>
-                        <h4>Distribution by Kind</h4>
-                        <span class="text-muted">Percentage of messages by Kind</span>
-                    </div>
-                    <!--div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                        <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                        <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
-                    </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                        <h4>Label</h4>
-                        <span class="text-muted">Something else</span>
-                    </div-->
-                </div>
-
-                <h2 class="sub-header">Messages</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped historian-messages">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Tags</th>
-                                <th>Kind</th>
-                                <th>Contents</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="5">You have no messages</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <h1 class="page-header">
+                    Overview - Loading...
+                    <small class="historian-dashboard-title"></small>
+                </h1>
             </div>
         </div>
     </div>
@@ -110,8 +86,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.min.js"></script>
     <script src="{baseUrl}/content/js/dashboard.js"></script>
+    <script src="{baseUrl}/content/js/dashboard.sidebar.js"></script>
+    <script src="{baseUrl}/content/js/dashboard.channel.overview.js"></script>
+    <script src="{baseUrl}/content/js/dashboard.channel.messages.js"></script>
     <script>
-        var historian
+        $(function () {
+            historian.load();
+        });
     </script>
 </body>
 </html>

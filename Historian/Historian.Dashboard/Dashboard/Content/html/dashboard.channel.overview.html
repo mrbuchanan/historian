@@ -1,0 +1,53 @@
+﻿<div class="page-header row">
+    <div class="col-md-8">
+        <h3>
+            Channel Overview
+            <small>&#35;</small><small class="hs-channel-name"></small>
+        </h3>
+    </div>
+    <div class="col-md-4">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <a id="channel_overview" role="button" class="btn btn-default active">Overview</a>
+            <a id="channel_messages" role="button" class="btn btn-default">Messages</a>
+        </div>
+    </div>
+</div>
+<div class="row placeholders">
+    <div class="col-md-4 col-xs-6 col-sm-3 placeholder">
+        <canvas class="historian-messages-kindsChart" width="400" height="400"></canvas>
+        <h4>
+            Distribution by Kind
+            <small>Last 10 Messages</small>
+        </h4>
+    </div>
+    <div class="col-md-8 col-xs-6 col-sm-3 placeholder">
+        <canvas class="hs-messages-lastTwelveHoursChart" width="800" height="400"></canvas>
+        <h4>
+            Last Twelve Hours
+            <small>By Kind</small>
+        </h4>
+    </div>
+</div>
+
+<h4 class="sub-header">
+    Messages
+    <small>10 most recent</small>
+</h4>
+<div class="table-responsive">
+    <table class="table table-striped historian-messages">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Title</th>
+                <th>Tags</th>
+                <th>Kind</th>
+                <th>Contents</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="6">You have no messages</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
