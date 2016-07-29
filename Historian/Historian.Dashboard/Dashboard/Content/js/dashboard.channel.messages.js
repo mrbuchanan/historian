@@ -33,8 +33,6 @@
             if (data.length == 0) {
                 $('.historian-messages tbody').html('<tr><td colspan="6">There are no messages for &#35;' + channel + '</td></tr>');
             } else {
-                var kinds = new Array();
-
                 for (var i = 0; i < data.length; i++) {
                     // create row
                     var row = $("<tr />");
@@ -69,8 +67,6 @@
 
                     // append row
                     row.appendTo($('.historian-messages tbody'));
-
-                    kinds.push(data[i].KindName);
                 }
             }
 

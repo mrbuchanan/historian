@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Historian
+namespace Historian.Loggers.SqlLogger.Entities
 {
-    [Serializable]
-    public class ChannelGroup
+    internal class ChannelGroup
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public List<Channel> Channels { get; }
     }
 }

@@ -52,7 +52,7 @@ namespace Historian.Service.Controllers
             var currentDate = DateTime.Now;
             var periodEnd = currentDate;
             var periodStart = periodEnd.AddHours(-totalHours);
-            var currentHour = currentDate.Hour;
+            var currentHour = currentDate.Hour + 2;
             var endHour = currentHour;
             var startHour = currentHour - totalHours;
             if (startHour < 0)

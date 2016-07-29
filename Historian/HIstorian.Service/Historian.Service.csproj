@@ -139,11 +139,13 @@
     </Compile>
     <Compile Include="Service\MessageDrop.cs" />
     <Compile Include="Service\SetupDatabase.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="ServiceStartup.cs" />
     <Compile Include="WebApiConfig.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
