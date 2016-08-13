@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
 
-namespace Historian.Service.Service
+namespace Historian.Api.Service
 {
     internal static class MessageDrop
     {

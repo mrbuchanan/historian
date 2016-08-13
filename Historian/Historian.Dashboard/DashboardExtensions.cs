@@ -25,8 +25,12 @@ namespace Historian.Dashboard
                 baseUrl = options.DashboardUri
             });
 
+            var landingPage = options.BypassLandingPage ? 
+                              "Dashboard.Content.html.landing.redirect.html" : 
+                              "Dashboard.Content.html.landing.html";
+
             // host the landing page
-            app.HostPage("/", "Dashboard.Content.html.landing.html", new
+            app.HostPage("/", landingPage, new
             {
                 historianServiceUri = options.HistorianServiceUri,
                 baseUrl = options.DashboardUri

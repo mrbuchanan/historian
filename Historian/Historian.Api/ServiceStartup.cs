@@ -14,9 +14,9 @@ using Hangfire;
 using Microsoft.Owin.BuilderProperties;
 using System.Threading;
 using System.Configuration;
-using Historian.Service.Service;
+using Historian.Api.Service;
 
-namespace Historian.Service
+namespace Historian.Api
 {
     public class ServiceStartup
     {
@@ -72,7 +72,7 @@ namespace Historian.Service
                 var hangFireConnectionInfo = ConfigurationManager.AppSettings["HangfireConnection"];
 
                 // setup hangfire storage
-                GlobalConfiguration.Configuration
+                Hangfire.GlobalConfiguration.Configuration
                     .UseSqlServerStorage(hangFireConnectionInfo);
 
                 // show dashboard

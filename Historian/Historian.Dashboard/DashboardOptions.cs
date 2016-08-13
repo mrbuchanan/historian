@@ -18,5 +18,7 @@ namespace Historian.Dashboard
         internal Guid AuthenticationToken { get; private set; }
 
         public string DashboardUri { get; set; }
+
+        public bool BypassLandingPage { get; set; }
     }
 }

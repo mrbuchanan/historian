@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Hosting;
+﻿using Historian.Api;
+using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

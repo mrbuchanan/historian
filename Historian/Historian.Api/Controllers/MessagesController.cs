@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Hangfire;
-using Historian.Service.Service;
+using Historian.Api.Service;
 
-namespace Historian.Service.Controllers
+namespace Historian.Api.Controllers
 {
     [RoutePrefix("api/messages")]
     public class MessagesController : ApiController

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Historian.Service.Controllers
+namespace Historian.Api.Controllers
 {
     [RoutePrefix("api/channels")]
     public class ChannelsController : ApiController

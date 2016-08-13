@@ -77,6 +77,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Historian.Api\Historian.Api.csproj">
+      <Project>{5A2C2AF8-DF32-44E6-9F7F-720574932719}</Project>
+      <Name>Historian.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Historian.Dashboard\Historian.Dashboard.csproj">
       <Project>{6b84037c-5393-4d62-9b3a-c832d0b43bc5}</Project>
       <Name>Historian.Dashboard</Name>
