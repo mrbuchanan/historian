@@ -11,6 +11,7 @@ The idea for historian came about while working on a project that required a lot
   - Choice of logging backends on service side:
     - MemoryLogger
     - MemoryWBackupLogger
+    - SqlLogger (*Note, that this should only be used with the HangFire logging option turned on*)
 - Remote logging (*Historian.Remote*)
 - Simple Message format (handles HTML)
 - Simple Dashboard allowing you to view messages
@@ -18,10 +19,9 @@ The idea for historian came about while working on a project that required a lot
   - Graphs showing proportion of messages by kind/severity
   - Throughput graphs for each channel. *Note that this is for the last twelve hours, and shows one line for each category of message received.*
   - View messages for the last day by kind (Debug, Information, Warning, Error and WTF)
+  - Reload of selected Channel if page is refreshed.
 
 ### Planned Features
-- Logging:
-  - SqlLogger (*Note, that this should only be used with the HangFire logging option turned on*)
 - Dashboard:
   - Search all messages received on a channel (inputs present, but functionality not)
   - Pattern Filters:
