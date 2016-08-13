@@ -9,6 +9,12 @@ namespace Historian
     public interface ILogger
     {
         /// <summary>
+        /// Get the Loggers Configuration
+        /// </summary>
+        /// <returns></returns>
+        ILoggerConfiguration GetConfiguration();
+
+        /// <summary>
         /// Drop a message into the logger
         /// </summary>
         /// <param name="message">The message to add</param>

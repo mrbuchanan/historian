@@ -113,5 +113,10 @@ namespace Historian.Loggers
                 Name = CatchAllGroup
             });
         }
+
+        public ILoggerConfiguration GetConfiguration()
+        {
+            return _configuration;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Historian.Remote
 {
-    public interface IRemoteLoggerConfiguration 
+    public interface IRemoteLoggerConfiguration : ILoggerConfiguration
     {
         Uri Endpoint { get; }
 

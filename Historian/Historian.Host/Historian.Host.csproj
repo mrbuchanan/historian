@@ -89,10 +89,6 @@
       <Project>{ffc8bf60-54ca-4ec9-b8cd-8af86104b661}</Project>
       <Name>Historian.Loggers.SqlLogger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HIstorian.Service\Historian.Service.csproj">
-      <Project>{6fefd12f-189e-496a-9a57-f1d99d1ebcb8}</Project>
-      <Name>Historian.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

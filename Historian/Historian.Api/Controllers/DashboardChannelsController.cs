@@ -117,11 +117,11 @@ namespace Historian.Api.Controllers
                 {
                     label = gKind.Key.ToString(),
                     data = currentSeries,
-                    backgroundColor = ChartHelper.GetColourByKind(gKind.Key, 0.4M),
-                    borderColor = ChartHelper.GetColourByKind(gKind.Key, 1.0M),
-                    pointBorderColor = ChartHelper.GetColourByKind(gKind.Key, 1.0M),
-                    pointHoverBackgroundColor = ChartHelper.GetColourByKind(gKind.Key,1.0M),
-                    pointHoverBorderColor = ChartHelper.GetColourByKind(gKind.Key, 1.0M),
+                    backgroundColor = ChartHelper.GetColourByKindAsRGBA(gKind.Key, 0.05M),
+                    borderColor = ChartHelper.GetColourByKindAsRGBA(gKind.Key, 1.0M),
+                    pointBorderColor = ChartHelper.GetColourByKindAsRGBA(gKind.Key, 1.0M),
+                    pointHoverBackgroundColor = ChartHelper.GetColourByKindAsRGBA(gKind.Key,1.0M),
+                    pointHoverBorderColor = ChartHelper.GetColourByKindAsRGBA(gKind.Key, 1.0M),
                 });
             }
 

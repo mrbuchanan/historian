@@ -1,5 +1,4 @@
-﻿using Hangfire;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,73 +14,34 @@ namespace Historian.Remote
 
         public RemoteLogger(IRemoteLoggerConfiguration config)
         {
+            // set configuration
             _configuration = config;
 
+            // if no configuration provided, throw exception
             if (_configuration == null) throw new ArgumentNullException(nameof(config));           
         }
 
         public void Log(Message message)
         {
             // send message
-            SendMessage(message, _configuration);
+            var task = LogAsync(message);
+            task.Wait();
         }
 
         public void Log(string contents, string channel, MessageKind kind = MessageKind.Information, string title = null, params string[] tags)
         {
-            // check inputs
-            if (string.IsNullOrEmpty(title)) title = kind.ToString();
-
-            // create message
-            var message = new Message()
-            {
-                Contents = contents,
-                Channel = channel,
-                Kind = kind,
-                Title = title
-            };
-            
-            // check and add tags
-            if (tags != null) message.Tags = tags.ToList();
-
             // send message
-            SendMessage(message, _configuration);
+            var task = LogAsync(contents, channel, kind, title, tags);
+            task.Wait();
         }
 
-        private void SendMessage(Message message, IRemoteLoggerConfiguration configuration)
-        {
-            // queue send on hangfire
-            BackgroundJob.Enqueue(() => DoSend(message, configuration));
-        }
-
-        public void DoSend(Message message, IRemoteLoggerConfiguration configuration)
+        private async Task DoSendAsync(Message message, IRemoteLoggerConfiguration configuration)
         {
             // create http client
             var client = new HttpClient()
             {
                 BaseAddress = configuration.Endpoint
             };
-
-            // serialise to json
-            var json = JsonConvert.SerializeObject(message);
-
-            // create http content
-            var content = new StringContent(json);
-
-            // post message
-            var response = client.PostAsync(configuration.MessageDropPath, content);
-
-            // wait for response
-            response.Wait();
-        }
-
-        public async Task DoSendAsync(Message message, IRemoteLoggerConfiguration configuration)
-        {
-            // create http client
-            var client = new HttpClient()
-            {
-                BaseAddress = configuration.Endpoint
-            };
-
 
             // serialise to json
             var json = JsonConvert.SerializeObject(message);
@@ -118,6 +78,11 @@ namespace Historian.Remote
 
             // send message
             await DoSendAsync(message, _configuration);
+        }
+
+        public ILoggerConfiguration GetConfiguration()
+        {
+            return _configuration;
         }
     }
 }

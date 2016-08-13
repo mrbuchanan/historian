@@ -14,6 +14,12 @@ namespace Historian.Remote
             MessageDropPath = "messages/drop";
         }
 
+        public string Connection
+        {
+            get { return Endpoint.ToString(); }
+            set { Endpoint = new Uri(value); }
+        }
+
         public Uri Endpoint { get; private set; }
 
         public string MessageDropPath { get; private set; }

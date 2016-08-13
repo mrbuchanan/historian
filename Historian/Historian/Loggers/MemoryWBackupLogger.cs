@@ -209,5 +209,10 @@ namespace Historian.Loggers
             // write xml to file
             File.WriteAllText(_configuration.Connection, xml);
         }
+
+        public ILoggerConfiguration GetConfiguration()
+        {
+            return _configuration;
+        }
     }
 }

@@ -209,5 +209,10 @@ namespace Historian.Loggers.SqlLogger
         {
 
         }
+
+        public ILoggerConfiguration GetConfiguration()
+        {
+            return _configuration;
+        }
     }
 }
