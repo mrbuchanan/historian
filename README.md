@@ -20,6 +20,7 @@ The idea for historian came about while working on a project that required a lot
   - Throughput graphs for each channel. *Note that this is for the last twelve hours, and shows one line for each category of message received.*
   - View messages for the last day by kind (Debug, Information, Warning, Error and WTF)
   - Reload of selected Channel if page is refreshed.
+  - log4net Appender, using Historian.Remote to provide logging to Historian from log4net
 
 ### Planned Features
 - Dashboard:
