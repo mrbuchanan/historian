@@ -27,7 +27,7 @@ namespace Historian.Loggers
                 // add default channel group
                 ChannelGroups.Add(new ChannelGroup()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = 0,
                     Name = CatchAllGroup
                 });
             }
@@ -116,7 +116,7 @@ namespace Historian.Loggers
                 _state.Channels.Add(new Channel()
                 {
                     Name = message.Channel,
-                    Id = Guid.NewGuid(),
+                    Id = 0,
                     Group = CatchAllGroup
                 });
             }

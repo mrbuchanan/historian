@@ -8,10 +8,10 @@ namespace Historian
 {
     public enum MessageKind
     {
-        Debug,
-        Information,
-        Warning,
-        Error,
-        WTF
+        Debug = 1,
+        Information = 2,
+        Warning = 3,
+        Error = 4,
+        WTF = 5
     }
 }

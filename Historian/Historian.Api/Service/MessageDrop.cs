@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Hangfire;
 
-namespace Historian.Service.Service
+namespace Historian.Api.Service
 {
     internal static class MessageDrop
     {
+        public static bool HangFireEnabled { get; set; }
+
         public static void Drop(Message message, ILogger logger)
         {
-            if (Properties.Settings.Default.UseHangFireQueue) BackgroundJob.Enqueue(() => DoDrop(message, logger));
+            if (HangFireEnabled) BackgroundJob.Enqueue(() => DoDrop(message, logger));
             else DoDrop(message, logger);
         }
 

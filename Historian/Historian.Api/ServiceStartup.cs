@@ -14,21 +14,27 @@ using Hangfire;
 using Microsoft.Owin.BuilderProperties;
 using System.Threading;
 using System.Configuration;
+using Historian.Api.Service;
 
-namespace Historian.Service
+namespace Historian.Api
 {
-    public class Startup
+    public class ServiceStartup
     {
         public void Configuration(IAppBuilder app)
         {
+            var loggerConnectionInfo = ConfigurationManager.AppSettings["LoggerConnection"];
+            var loggerTypeName = ConfigurationManager.AppSettings["LoggerType"];
+
+            var hangFireEnabled = bool.Parse(ConfigurationManager.AppSettings["HangfireEnabled"]);
+
+
             // create logger configuration
             var loggerConfiguration = new LoggerConfiguration()
             {
-                Connection = Properties.Settings.Default.LoggerConnection
+                Connection = ConfigurationManager.AppSettings["LoggerConnection"]
             };
 
             // get logger type
-            var loggerTypeName = Properties.Settings.Default.LoggerType;
             var loggerType = Type.GetType(loggerTypeName);
             var loggerInstance = (IStartableLogger)Activator.CreateInstance(loggerType, loggerConfiguration);
 
@@ -57,14 +63,17 @@ namespace Historian.Service
             WebApiConfig.Register(webApiConfig);
 
             // setup hangfire
-            if (Properties.Settings.Default.UseHangFireQueue)
+            if (hangFireEnabled)
             {
+                // turn on hangfire for message drop
+                MessageDrop.HangFireEnabled = hangFireEnabled;
+
                 // get hangfire connection string
-                var hangFireConnectionString = ConfigurationManager.ConnectionStrings["HangFire.ConnectionString"];
+                var hangFireConnectionInfo = ConfigurationManager.AppSettings["HangfireConnection"];
 
                 // setup hangfire storage
-                GlobalConfiguration.Configuration
-                    .UseSqlServerStorage(hangFireConnectionString.ConnectionString);
+                Hangfire.GlobalConfiguration.Configuration
+                    .UseSqlServerStorage(hangFireConnectionInfo);
 
                 // show dashboard
                 app.UseHangfireDashboard();

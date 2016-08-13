@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Historian.Service.Controllers
+namespace Historian.Api.Controllers
 {
     [RoutePrefix("api/dashboard")]
     public class DashboardChannelsController : ApiController
@@ -23,22 +23,36 @@ namespace Historian.Service.Controllers
         [Route("channels/{channel}/messages/mostRecent/{number}")]
         public IEnumerable<Message> MostRecent(string channel, int number)
         {
+            // get messages
             var messages = _logRetriever.GetMessages(channel);
+
+            // order by timestamp
             messages = messages.OrderByDescending(m => m.Timestamp);
+
+            // take number provided
             return messages.Take(number);
         }
 
         [HttpGet]
-        [Route("channels/{channel}/messages/last-day")]
-        public IEnumerable<Message> LastDay(string channel)
+        [Route("channels/{channel}/messages/last-day/{kind}")]
+        public IEnumerable<Message> LastDay(string channel, string kind = "All")
         {
+            // get messages
             var messages = _logRetriever.GetMessages(channel);
 
+            // get day period
             var endPeriod = DateTime.Now;
             var startPeriod = endPeriod.AddDays(-1);
 
+            // get messages in period
             messages = messages.Where(m => m.Timestamp >= startPeriod && m.Timestamp <= endPeriod);
+            if (kind != "All")
+            {
+                var kindEnum = (MessageKind) Enum.Parse(typeof(MessageKind), kind);
+                messages = messages.Where(m => m.Kind == kindEnum);
+            }
 
+            // return messages by timestamp
             return messages.OrderByDescending(m => m.Timestamp);
         }
 
@@ -46,6 +60,7 @@ namespace Historian.Service.Controllers
         [Route("channels/{channel}/graphs/last-twelve-hours")]
         public dynamic LastTwelveHours(string channel)
         {
+            // setup for retrieval
             var totalHours = 12;
             var hours = new List<int>();
             var series = new List<dynamic>();
@@ -55,11 +70,14 @@ namespace Historian.Service.Controllers
             var currentHour = currentDate.Hour + 2;
             var endHour = currentHour;
             var startHour = currentHour - totalHours;
+
+            // set start of period
             if (startHour < 0)
             {
                 startHour = 24 - startHour;
             }
 
+            // add hours for labels
             var hourCounter = startHour;
             for (var i = 0; i < totalHours; i++)
             {
@@ -69,13 +87,22 @@ namespace Historian.Service.Controllers
                 hourCounter++;
             }
 
+            // get messages
             var messages = _logRetriever.GetMessages(channel);
+
+            // get messages for period
             var messagesLastPeriod = messages.Where(m => m.Timestamp >= periodStart && m.Timestamp <= periodEnd);
+
+            // group by kind
             var groupedByKind = messagesLastPeriod.GroupBy(m => m.Kind);
 
+            // go through kinds
             foreach (var gKind in groupedByKind)
             {
+                // get all for kind grouped by hour
                 var byHour = gKind.GroupBy(m => m.Timestamp.Hour);
+
+                // create current dataset
                 var currentSeries = new List<int>();
                 foreach (var hour in hours)
                 {
@@ -85,6 +112,7 @@ namespace Historian.Service.Controllers
                     currentSeries.Add(messageCount);
                 }
 
+                // add series data
                 series.Add(new
                 {
                     label = gKind.Key.ToString(),
@@ -97,6 +125,7 @@ namespace Historian.Service.Controllers
                 });
             }
 
+            // return graph data
             return new
             {
                 labels = hours.Select(t => string.Format("{0:D2}:00", t)),

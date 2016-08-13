@@ -1,4 +1,5 @@
-﻿using Historian.Service;
+﻿using Historian.Api;
+using Historian.Service;
 using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,12 @@ namespace Historian.Service
                 Port = 6666
             };
 
-            using (WebApp.Start<Startup>("http://+:8081"))
+            using (WebApp.Start<ServiceStartup>("http://+:8081"))
             {
                 var client = new HttpClient()
                 {
                     BaseAddress = new Uri("http://localhost:8081/api/")
                 };
-
-                var message = "{ Contents: \"test\", Kind: \"Information\", Channel: \"PureFarming Errors\" }";
 
                 Console.WriteLine("bob!");
                 Console.ReadLine();

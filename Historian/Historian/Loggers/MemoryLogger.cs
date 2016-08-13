@@ -34,7 +34,7 @@ namespace Historian.Loggers
                 _channels.Add(new Channel()
                 {
                     Name = message.Channel,
-                    Id = Guid.NewGuid(),
+                    Id = 0,
                     Group = CatchAllGroup
                 });
             }
@@ -96,7 +96,7 @@ namespace Historian.Loggers
 
             _channelGroups.Add(new ChannelGroup()
             {
-                Id = Guid.NewGuid(),
+                Id = 0,
                 Name = CatchAllGroup
             });
         }
@@ -109,7 +109,7 @@ namespace Historian.Loggers
 
             _channelGroups.Add(new ChannelGroup()
             {
-                Id = Guid.NewGuid(),
+                Id = 0,
                 Name = CatchAllGroup
             });
         }

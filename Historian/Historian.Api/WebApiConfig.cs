@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 
-namespace Historian.Service
+namespace Historian.Api
 {
     internal class WebApiConfig
     {

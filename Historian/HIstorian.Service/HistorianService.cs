@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Hosting;
+﻿using Historian.Api;
+using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ namespace Historian.Service
             };
 
             // start webapi
-            _server = WebApp.Start<Startup>(options);
+            _server = WebApp.Start<ServiceStartup>(options);
         }
 
         protected override void OnStop()

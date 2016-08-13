@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Historian.Service.Service
+namespace Historian.Api.Service
 {
     internal class SetupDatabase
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Historian.Service
+namespace Historian.Api
 {
     internal class ChartHelper
     {

@@ -111,7 +111,9 @@ namespace Historian.Dashboard.Dashboard.Content
         public static void HostPage(this IAppBuilder app, string path, string resource,
             Func<IOwinContext, object> getModel)
         {
-            HostPageAsync(app, path, resource, async (context) => getModel(context));
+            HostPageAsync(app, path, resource, (context) => {
+                return Task.FromResult(getModel(context));
+            });
         }
 
         /// <summary>

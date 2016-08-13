@@ -45,6 +45,8 @@
                         var item = $("<li />");
                         var link = $('<a href="#" />');
                         link.html('&#35;' + data[i].Name);
+                        link.attr('href', '#' + data[i].Name);
+                        link.addClass('channel-selector');
                         link.appendTo(item);
 
                         // add click handler
@@ -52,9 +54,24 @@
 
                         // add attributes
                         item.attr('channel_name', data[i].Name);
+                        link.attr('channel_name', data[i].Name);
 
                         // add to sidebar
                         item.appendTo(sidebar);
+                    }
+
+                    // check for selected channel
+                    if (window.location.hash.length > 1) {
+                        // get channel name
+                        var channelName = window.location.hash.substring(1);
+
+                        // find link
+                        var link = $('a[channel_name=' + channelName + ']');
+
+                        // activate
+                        link.click();
+                    } else {
+                        $('.channel-selector:first').click();
                     }
                 }
             });

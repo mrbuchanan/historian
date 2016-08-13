@@ -73,6 +73,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dashboard\Content\html\landing.redirect.html" />
+    <Content Include="Dashboard\Content\js\dashboard.messages.table.js" />
     <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.messages.html" />
     <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.overview.html" />
     <Content Include="Dashboard\Content\html\dashboard.overview.html" />
