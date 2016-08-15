@@ -70,7 +70,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
+    <Compile Include="ServiceStartup.cs" />
+    <Compile Include="DashboardStartup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\Historian.Loggers.SqlLogger\Historian.Loggers.SqlLogger.csproj">
       <Project>{ffc8bf60-54ca-4ec9-b8cd-8af86104b661}</Project>
       <Name>Historian.Loggers.SqlLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Historian\Historian.csproj">
+      <Project>{32C01FC4-36AB-4DEA-BCAE-D7A8FB4D7FB4}</Project>
+      <Name>Historian</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

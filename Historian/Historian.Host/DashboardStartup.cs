@@ -13,13 +13,12 @@ namespace Historian.Host
         public void Configuration(IAppBuilder app)
         {
             // host dashboard
-            app.HostDashboard(new DashboardOptions()
+            app.UseHistorianDashboard(new DashboardOptions()
             {
                 DashboardUri = "http://localhost:8082",
                 HistorianServiceUri = "http://localhost:8081",
                 BypassLandingPage = true
             });
-            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
         }
     }
 }

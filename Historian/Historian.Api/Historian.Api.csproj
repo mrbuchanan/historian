@@ -114,8 +114,9 @@
     <Compile Include="Controllers\ChannelsController.cs" />
     <Compile Include="Controllers\DashboardChannelsController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="HistorianApiOptions.cs" />
+    <Compile Include="OwinExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceStartup.cs" />
     <Compile Include="Service\MessageDrop.cs" />
     <Compile Include="Service\SetupDatabase.cs" />
     <Compile Include="WebApiConfig.cs" />

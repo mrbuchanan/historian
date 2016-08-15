@@ -1,42 +1,36 @@
-﻿using Historian.Loggers;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
+using Hangfire;
+using Historian.Api.Service;
+using Microsoft.Owin.BuilderProperties;
 using Ninject;
 using Ninject.Web.Common.OwinHost;
 using Ninject.Web.WebApi.OwinHost;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
-using Hangfire;
-using Microsoft.Owin.BuilderProperties;
-using System.Threading;
-using System.Configuration;
-using Historian.Api.Service;
 
 namespace Historian.Api
 {
-    public class ServiceStartup
+    public static class OwinExtensions
     {
-        public void Configuration(IAppBuilder app)
+        /// <summary>
+        /// Host the Historian API
+        /// </summary>
+        /// <param name="app">The App Builder to use</param>
+        /// <param name="options">The options for setting up the API</param>
+        public static void UseHistorianApi(this IAppBuilder app, HistorianApiOptions options)
         {
-            var loggerConnectionInfo = ConfigurationManager.AppSettings["LoggerConnection"];
-            var loggerTypeName = ConfigurationManager.AppSettings["LoggerType"];
-
-            var hangFireEnabled = bool.Parse(ConfigurationManager.AppSettings["HangfireEnabled"]);
-
-
-            // create logger configuration
-            var loggerConfiguration = new LoggerConfiguration()
-            {
-                Connection = ConfigurationManager.AppSettings["LoggerConnection"]
-            };
+            // check inputs
+            if (options == null) throw new ArgumentNullException(nameof(options));
 
             // get logger type
-            var loggerType = Type.GetType(loggerTypeName);
-            var loggerInstance = (IStartableLogger)Activator.CreateInstance(loggerType, loggerConfiguration);
+            var loggerInstance = (IStartableLogger)Activator.CreateInstance(options.LoggerType, options.LoggerConfiguration);
 
             // start logger
             loggerInstance.Start();
@@ -63,13 +57,13 @@ namespace Historian.Api
             WebApiConfig.Register(webApiConfig);
 
             // setup hangfire
-            if (hangFireEnabled)
+            if (options.UseHangFire)
             {
                 // turn on hangfire for message drop
-                MessageDrop.HangFireEnabled = hangFireEnabled;
+                MessageDrop.HangFireEnabled = true;
 
                 // get hangfire connection string
-                var hangFireConnectionInfo = ConfigurationManager.AppSettings["HangfireConnection"];
+                var hangFireConnectionInfo = options.HangFireConnectionString;
 
                 // setup hangfire storage
                 Hangfire.GlobalConfiguration.Configuration
@@ -100,7 +94,7 @@ namespace Historian.Api
         {
             // setup NInject kernel
             var kernel = new StandardKernel();
-            
+
             // load the current assembly
             kernel.Load(Assembly.GetExecutingAssembly());
 

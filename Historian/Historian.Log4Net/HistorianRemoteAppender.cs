@@ -19,6 +19,10 @@ namespace Historian.Log4Net
             Task.Run(() => SendMessage(loggingEvent));
         }
 
+        /// <summary>
+        /// Send a message to the Historian API
+        /// </summary>
+        /// <param name="loggingEvent">The Log4Net event to send</param>
         private void SendMessage(LoggingEvent loggingEvent)
         {
             // setup the logger if it needs it
@@ -44,6 +48,9 @@ namespace Historian.Log4Net
             _remoteLogger.Log(toSend);
         }
 
+        /// <summary>
+        /// Setup the logger and update configuration if necessary
+        /// </summary>
         private void SetupLogger()
         {
             // get the current endpoint uri
@@ -65,6 +72,11 @@ namespace Historian.Log4Net
             if(newLogger) _remoteLogger = new RemoteLogger(new RemoteLoggerConfiguration(endpointUri));
         }
 
+        /// <summary>
+        /// Get a Historian MessageKind from a Log4Net Level
+        /// </summary>
+        /// <param name="alertLevel">The level of the given Alert</param>
+        /// <returns>The appropriate Historian MessageKind value</returns>
         private MessageKind GetMessageKind(Level alertLevel)
         {
             // get information messages
@@ -88,19 +100,27 @@ namespace Historian.Log4Net
             // otherwise return as information
             return MessageKind.Information;
         }
-
+        /// <summary>
+        /// The endpoint for the Messages to be sent to
+        /// </summary>
         public string Endpoint
         {
             get { return _endpoint; }
             set { _endpoint = value; }
         }
 
+        /// <summary>
+        /// The channel to send messages to
+        /// </summary>
         public string Channel
         {
             get { return _channel; }
             set { _channel = value; }
         }
 
+        /// <summary>
+        /// The name of the application messages are being sent from
+        /// </summary>
         public string Application
         {
             get { return _application; }

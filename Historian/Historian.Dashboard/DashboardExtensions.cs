@@ -1,16 +1,16 @@
 ﻿using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Historian.Dashboard.Dashboard.Content;
 
 namespace Historian.Dashboard
 {
     public static class DashboardExtensions
     {
-        public static void HostDashboard(this IAppBuilder app, DashboardOptions options)
+        /// <summary>
+        /// Host the Historian Dashboard, using the provided options
+        /// </summary>
+        /// <param name="app">The App Builder to use</param>
+        /// <param name="options">The options to configure the Dashboard</param>
+        public static void UseHistorianDashboard(this IAppBuilder app, DashboardOptions options)
         {
             // host content (images etc)
             app.HostContent(options);
@@ -22,9 +22,11 @@ namespace Historian.Dashboard
             app.HostPage("/dashboard", "Dashboard.Content.html.dashboard.html", new
             {
                 historianServiceUri = options.HistorianServiceUri,
-                baseUrl = options.DashboardUri
+                baseUrl = options.DashboardUri,
+                bypassLandingPage = options.BypassLandingPage
             });
 
+            // get the landing page
             var landingPage = options.BypassLandingPage ? 
                               "Dashboard.Content.html.landing.redirect.html" : 
                               "Dashboard.Content.html.landing.html";
