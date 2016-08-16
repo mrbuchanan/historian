@@ -3,7 +3,7 @@
 Welcome to historian, this is a tool intended to provide internal, application agnostic logging and analysis.
 
 ## Documentation
-Go to the [wiki](./wiki/Home) for documentation.
+Go to the [wiki](../../wiki/Home) for documentation.
 
 ### Basic Features
 - Logging
