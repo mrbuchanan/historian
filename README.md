@@ -1,9 +1,9 @@
-# historian
+# Historian
 
 Welcome to historian, this is a tool intended to provide internal, application agnostic logging and analysis.
 
-### History of historian
-The idea for historian came about while working on a project that required a lot of logging to determine what was going on, but was writing to file using log4net or similar, making the log files hard to find and read.
+## Documentation
+Go to the [wiki](./wiki/Home) for documentation.
 
 ### Basic Features
 - Logging
