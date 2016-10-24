@@ -74,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dashboard\Content\html\landing.redirect.html" />
+    <EmbeddedResource Include="Dashboard\Angular\html\dashboard.html" />
+    <EmbeddedResource Include="Dashboard\Content\js\angular\components.js" />
+    <EmbeddedResource Include="Dashboard\Content\js\angular\dashboard.js" />
     <Content Include="Dashboard\Content\js\dashboard.messages.table.js" />
     <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.messages.html" />
     <EmbeddedResource Include="Dashboard\Content\html\dashboard.channel.overview.html" />
@@ -101,6 +104,9 @@
       <Project>{32C01FC4-36AB-4DEA-BCAE-D7A8FB4D7FB4}</Project>
       <Name>Historian</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dashboard\Angular\js\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

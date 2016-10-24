@@ -26,6 +26,13 @@ namespace Historian.Dashboard
                 bypassLandingPage = options.BypassLandingPage
             });
 
+            // host the new dashboard page
+            app.HostPage("/dashboard/v2", "Dashboard.Angular.html.dashboard.html", new
+            {
+                historianServiceUri = options.HistorianServiceUri,
+                baseUrl = options.DashboardUri
+            });
+
             // get the landing page
             var landingPage = options.BypassLandingPage ? 
                               "Dashboard.Content.html.landing.redirect.html" : 

@@ -100,6 +100,7 @@ namespace Historian.Log4Net
             // otherwise return as information
             return MessageKind.Information;
         }
+
         /// <summary>
         /// The endpoint for the Messages to be sent to
         /// </summary>
