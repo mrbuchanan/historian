@@ -1,16 +1,16 @@
 ﻿angular.module('components', [])
        // setup sidebar component
-       .directive('sidebar', function () {
+       .component('sidebar', function () {
            return {
                // restrict to element name only
                restrict: 'E',
                transclude: true,
                scope: {},
                controller: function ($scope, $element) {
-                   var channels = $scope.channels = $scope.$parent.channels;
+                   this.channels = $scope.channels = $scope.$parent.channels;
 
-                   $scope.select = function (channel) {
-                       angular.forEach(channels, function (c) {
+                   this.select = function (channel) {
+                       angular.forEach(this.channels, function (c) {
                            c.selected = false;
                        });
 
@@ -19,8 +19,8 @@
                },
                template:
                    '<ul class="nav nav-sidebar">' +
-                        '<li ng-repeat="channel in channels">' +
-                            '<a href="" ng-click="select(channel)" ng-class="{active:channel.selected}">{{channel.title}}</a>' +
+                        '<li ng-repeat="channel in $ctrl.channels">' +
+                            '<a href="#" ng-click="$ctrl.select(channel)" ng-class="{active:channel.selected}">{{channel.title}}</a>' +
                         '</li>' +
                    '</ul>',
                replace: true,

@@ -10,21 +10,59 @@ namespace Historian.Host
 {
     class Program
     {
+        private IDisposable _api;
+        private IDisposable _dashboard;
+
         static void Main(string[] args)
         {
-            var messageService = WebApp.Start<ServiceStartup>("http://+:8081");
-            var dashboard = WebApp.Start<DashboardStartup>("http://+:8082");
+            var p = new Program();
+            p.Run();
+        }
+
+        private void Run()
+        {
+            Start();
+
+            var exit = false;
+
+            while(!exit)
+            {
+                var entered = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(entered))
+                {
+                    Console.WriteLine("Please enter a valid command:");
+                    Console.WriteLine("\trestart");
+                    Console.WriteLine("\texit");
+                }
+                else if (entered.ToLower() == "restart")
+                {
+                    Stop();
+                    Start();
+                }
+                else if (entered.ToLower() == "exit")
+                {
+                    Stop();
+                    exit = true;
+                }
+            }
+        }
+
+        private void Start()
+        {
+            _api = WebApp.Start<ServiceStartup>("http://+:8081");
+            _dashboard = WebApp.Start<DashboardStartup>("http://+:8082");
 
             Console.WriteLine("Historian Started");
             Console.WriteLine("Service: http://localhost:8081/");
             Console.WriteLine("Dashboard: http://localhost:8082/");
+        }
 
-            Console.ReadLine();
-
-            messageService.Dispose();
-            dashboard.Dispose();
-
-            Console.WriteLine("Historian Stopped, press any key to exit.");
+        private void Stop()
+        {
+            _api.Dispose();
+            _dashboard.Dispose();
+            Console.WriteLine("Historian Stopped");
         }
     }
 }

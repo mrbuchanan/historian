@@ -27,7 +27,7 @@ namespace Historian.Dashboard
             });
 
             // host the new dashboard page
-            app.HostPage("/dashboard/v2", "Dashboard.Angular.html.dashboard.html", new
+            app.HostPage("/dashboard/v2", "Dashboard.Content.html.angular.dashboard.html", new
             {
                 historianServiceUri = options.HistorianServiceUri,
                 baseUrl = options.DashboardUri
