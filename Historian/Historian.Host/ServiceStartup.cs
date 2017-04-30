@@ -19,7 +19,8 @@ namespace Historian.Host
             app.UseHistorianApi(new HistorianApiOptions()
             {
                 LoggerType = loggerType,
-                LoggerConfiguration = loggerConfiguration
+                LoggerConfiguration = loggerConfiguration,
+                UseHangFire = false
             });
         }
     }
